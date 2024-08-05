@@ -1,0 +1,21 @@
+version: '3'
+services:
+  project1:
+    build:
+      context: ./vite-react
+    ports:
+      - "3001:3000"
+  project2:
+    build:
+      context: ./test-02
+    ports:
+      - "3002:3000"
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - project1
+      - project2
